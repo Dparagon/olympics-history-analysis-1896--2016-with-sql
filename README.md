@@ -4,8 +4,9 @@ The modern Olympic Games were revived in 1896 in Athens by Pierre de Coubertin. 
 
 ### OVERVIEW AND OBJECTIVE
 
-This project is about uncovering insights and analysing historical data related to Olympic Games from the year 1896 to 2016. The dataset is available on kaggle and it has two tables namely: athlete and regions. The ‘athlete’ table consist of information about individual athlete participating in an event while ‘regions’ table consist of country information of athletes in the athlete table.
-SQL Server was the tool used for this project and this gives me oppourtunity to develop my skills in SQL. These SQL skills were put into use for this project:
+This project is about uncovering insights and analysing historical data related to Olympic Games from the year 1896 to 2016. The dataset is available on [kaggle](https://www.kaggle.com/datasets/heesoo37/120-years-of-olympic-history-athletes-and-results) and it has two tables namely: athlete and regions. The ‘athlete’ table consist of information about individual athlete participating in an event while ‘regions’ table consist of country information of athletes in the athlete table.
+
+SQL Server was the tool used for this project and this gives me opportunity to develop my skills in SQL. These SQL skills were put into use for this project:
 *	CTEs
 *	Joins
 *	Subqueries
