@@ -9,7 +9,7 @@ SQL Server was the tool used for this project and this gives me oppourtunity to 
 *	CTEs
 *	Joins
 *	Subqueries
-*	Window functions etc.
+*	Window Functions etc.
   
 The tables were imported into SQL Server and were renamed for the purpose of this project. Athlete table renamed to ‘olympics_history’ and regions table renamed to ‘olympics_history_noc_regions’.
 
@@ -24,6 +24,8 @@ SELECT Season, COUNT(DISTINCT Year) AS No_of_games
 FROM olympics_history
 GROUP BY Season
 ```
+![1](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/8a7e2294-c4a2-4ea0-ab15-956affa9249c)
+
 
 2.	List all the Olympics held.
 
@@ -31,6 +33,8 @@ GROUP BY Season
 SELECT DISTINCT Year, Season
 FROM olympics_history
 ```
+![2](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/d9fd2319-18f5-49df-943b-2bd27e7d24b1)
+
 
 3.	List the total no. of nations who participated in each Olympic Games.
    
@@ -40,6 +44,8 @@ FROM olympics_history
 GROUP BY Year, Season 
 ORDER BY Year
 ```
+![3](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/58ef0054-9ddc-4c91-8692-d3e9c5b5a380)
+
 
 4.	Which year has the highest and lowest of nations participating in Olympics, and how many nations?
 
@@ -59,6 +65,8 @@ SELECT CONCAT(oly_high.Year,' ' , '-',' ' , oly_high.nation) AS highest_year,
        CONCAT(oly_low.Year,' ' , '-',' ' , oly_low.nation)  AS lowest_year
 FROM oly_high, oly_low
 ```
+![4](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/28fda840-8b48-421c-ac23-8a73dea4a34d)
+
 
 5.	Which nation has participated in all of the Olympic Games?
 
@@ -68,6 +76,8 @@ FROM olympics_history
 GROUP BY Team
 HAVING COUNT(Games) = (SELECT COUNT(DISTINCT Games)FROM olympics_history)
 ```
+![5](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/66e1b4e2-167f-419b-9303-5d61804947c9)
+
 
 6.	Which sport was played in all summer Olympic Games?
 
@@ -76,6 +86,8 @@ SELECT DISTINCT Sport
 FROM olympics_history
 WHERE Games LIKE '%Summer'
 ```
+![6](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/96205a3a-0244-455a-9ca1-e9397caa228c)
+
 
 7.	Which sport was played once in the Olympics?
 
@@ -85,6 +97,8 @@ FROM olympics_history
 GROUP BY Sport
 HAVING COUNT(DISTINCT Games) = 1
 ```
+![7](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/21035cee-09b4-47ae-bb3a-91cc97d86ba2)
+
 
 8.	Give the total no. of sports played in each Olympic Games.
 
@@ -93,6 +107,8 @@ SELECT Games, COUNT(DISTINCT Sport) AS sport_count
 FROM olympics_history
 GROUP BY Games 
 ```
+![8](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/80ffb449-1e34-4f32-bcf3-5c120514e1cf)
+
 
 9.	Who are the oldest athletes to win a gold medal?
 
@@ -104,6 +120,8 @@ FROM
     WHERE medal = 'Gold' AND AGE <> 'NA') oly
 WHERE Age_rank = 1
 ```
+![9](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/1fc4d5bf-e025-4365-9f55-f3170ca5bc94)
+
 
 10.	What is the ratio of male and female Athletes participation in all Olympics?
 
@@ -113,6 +131,8 @@ SELECT ROUND(CAST(SUM(CASE WHEN Sex = 'M' THEN 1 ELSE 0 END) AS FLOAT)/COUNT(*),
 FROM 
     (SELECT DISTINCT Name, Sex FROM olympics_history) oly
 ```
+![10](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/e7e1d6d8-54dc-4243-b1be-64694a0e21cb)
+
 
 11.	Who are the top 5 Athletes with the highest medals?
 
@@ -123,6 +143,8 @@ WHERE Medal <> 'NA'
 GROUP BY Name
 ORDER BY Medal_count DESC
 ```
+![11](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/b615b10f-526e-4a30-9776-69da2ecb7a5b)
+
 
 12.	List the total gold, silver and bronze medals won by each country.
 
@@ -150,6 +172,8 @@ FROM gold_medal g
 JOIN silver_medal s ON g.Team = s.Team
 JOIN bronze_medal b ON g.Team = b.Team
 ```
+![12](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/5c12318b-b9bb-45a3-b4c0-280beab058d4)
+
 
 13.	List the medals won by each country according to each Olympic Games.
 
@@ -172,13 +196,15 @@ bronze_medal AS (
 SELECT g.Games,
        g.Team,
        g.gold_count,
-	   s.silver_count,
-	   b.bronze_count
+       s.silver_count,
+       b.bronze_count
 FROM gold_medal g
 INNER JOIN silver_medal s ON g.Team = s.Team AND g.Games = s.Games
 INNER JOIN bronze_medal b ON g.Team = b.Team AND g.Games = b.Games
 ORDER BY g.Games ASC
 ```
+![13](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/ede02a42-9b02-48f1-834e-e4de0b2ab4b3)
+
 
 14.	Which country won the most gold, silver and bronze medals in each Olympic Games?
 
@@ -210,6 +236,8 @@ JOIN silver_medal AS s ON g.Games = s.Games AND g.Team = s.Team
 JOIN bronze_medal AS b ON g.Games = b.Games AND g.Team =s.Team
 WHERE g.gold_rank = 1 AND s.silver_rank = 1 AND b.bronze_rank = 1
 ```
+![14](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/e5e1622f-f65c-4583-9abf-2d5e44f41a10)
+
 
 15.	Which country have never won gold medal but won silver medals and bronze medals?
 
@@ -247,3 +275,4 @@ LEFT JOIN bronze_medal b ON g.region = b.region
 WHERE s.silver_count >= 1 OR b.bronze_count >= 1
 ORDER BY g.region
 ```
+![15](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/b82f24ed-9de1-4d77-aa7c-0a6969dff374)
