@@ -1,3 +1,7 @@
+
+![OLYMPICS 1](https://github.com/Dparagon/olympics-history-analysis-1896--2016-with-sql/assets/128928568/63996564-c0af-4092-81f6-d7ee8c94c288)
+
+
 ### BACKGROUND
 
 The modern Olympic Games were revived in 1896 in Athens by Pierre de Coubertin. Since that year, the event has grown into a global phenomenon bringing international unity through sport. The event occur every four (4) years, with both summer and winter editions showcasing wide range of sports and athletes all around the world.
